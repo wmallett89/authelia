@@ -16,6 +16,8 @@ type Session struct {
 
 	Redis *SessionRedis `koanf:"redis" json:"redis" jsonschema:"title=Redis" jsonschema_description:"Redis Session Provider configuration."`
 
+	Postgres *SessionPostgres `koanf:"postgres" json:"postgres" jsonschema:"title=Postgres" jsonschema_description:"Postgres Session Provider configuration."`
+
 	// Deprecated: Use the session cookies option with the same name instead.
 	Domain string `koanf:"domain" json:"domain" jsonschema:"deprecated,title=Domain"`
 }
@@ -99,4 +101,13 @@ var DefaultRedisHighAvailabilityConfiguration = SessionRedis{
 	TLS: &TLS{
 		MinimumVersion: TLSVersion{Value: tls.VersionTLS12},
 	},
+}
+
+type SessionPostgres struct {
+	Host      string `json:"host"`
+	Port      int64  `json:"port"`
+	Username  string `json:"username"`
+	Password  string `json:"password"`
+	Database  string `json:"database"`
+	TableName string `json:"table_name"`
 }
