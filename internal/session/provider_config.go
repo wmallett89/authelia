@@ -169,17 +169,21 @@ func NewSessionProvider(config schema.Session, certPool *x509.CertPool) (name st
 	case config.Postgres != nil:
 		logrus.Info("Postgres config found")
 		provider, err = postgre.New(postgre.Config{
-			Host:      config.Postgres.Host,
-			Port:      config.Postgres.Port,
-			Username:  config.Postgres.Username,
-			Password:  config.Postgres.Password,
-			Database:  config.Postgres.Database,
-			TableName: config.Postgres.TableName,
+			Host:            config.Postgres.Host,
+			Port:            config.Postgres.Port,
+			Username:        config.Postgres.Username,
+			Password:        config.Postgres.Password,
+			Database:        config.Postgres.Database,
+			TableName:       config.Postgres.TableName,
+			MaxOpenConns:    10,
+			MaxIdleConns:    5,
+			ConnMaxLifetime: 50,
 		})
 	default:
 		name = "memory"
 		provider, err = memory.New(memory.Config{})
 	}
 	logrus.Info("parsed postgres config successfully")
+	logrus.Infof("err: %s", err)
 	return name, provider, serializer, err
 }

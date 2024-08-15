@@ -217,7 +217,7 @@ var Keys = []string{
 	"session.postgres.username",
 	"session.postgres.password",
 	"session.postgres.database",
-	"session.postgres.table_name",
+	"session.postgres.tableName",
 	"session.domain",
 	"totp.disable",
 	"totp.issuer",

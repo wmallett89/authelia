@@ -109,5 +109,5 @@ type SessionPostgres struct {
 	Username  string `json:"username"`
 	Password  string `json:"password"`
 	Database  string `json:"database"`
-	TableName string `json:"table_name"`
+	TableName string `json:"tableName"`
 }
