@@ -70,8 +70,6 @@ func (ctx *CmdCtx) RootRunE(_ *cobra.Command, _ []string) (err error) {
 	}
 
 	warns, errs := ctx.LoadProviders()
-	ctx.log.Infof("Load Providers done. Errors %d, Warns %d", errs, warns)
-	ctx.log.Info("Load Providers done")
 	if len(warns) != 0 {
 		for _, err = range warns {
 			ctx.log.Warn(err)
@@ -79,7 +77,6 @@ func (ctx *CmdCtx) RootRunE(_ *cobra.Command, _ []string) (err error) {
 	}
 
 	if len(errs) != 0 {
-		ctx.log.Info("there were errors")
 		for _, err = range errs {
 			ctx.log.Error(err)
 		}

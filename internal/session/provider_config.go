@@ -167,7 +167,6 @@ func NewSessionProvider(config schema.Session, certPool *x509.CertPool) (name st
 			})
 		}
 	case config.Postgres != nil:
-		logrus.Info("Postgres config found")
 		provider, err = postgre.New(postgre.Config{
 			Host:            config.Postgres.Host,
 			Port:            config.Postgres.Port,
@@ -183,7 +182,5 @@ func NewSessionProvider(config schema.Session, certPool *x509.CertPool) (name st
 		name = "memory"
 		provider, err = memory.New(memory.Config{})
 	}
-	logrus.Info("parsed postgres config successfully")
-	logrus.Infof("err: %s", err)
 	return name, provider, serializer, err
 }

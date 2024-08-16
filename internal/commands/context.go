@@ -137,8 +137,6 @@ func (ctx *CmdCtx) LoadTrustedCertificates() (warns, errs []error) {
 // LoadProviders loads all providers into the CmdCtx.
 func (ctx *CmdCtx) LoadProviders() (warns, errs []error) {
 	// TODO: Adjust this so the CertPool can be used like a provider.
-	lg := logging.Logger()
-	lg.Info()
 	if warns, errs = ctx.LoadTrustedCertificates(); len(warns) != 0 || len(errs) != 0 {
 		return warns, errs
 	}
@@ -151,7 +149,6 @@ func (ctx *CmdCtx) LoadProviders() (warns, errs []error) {
 	ctx.providers.Regulator = regulation.NewRegulator(ctx.config.Regulation, ctx.providers.StorageProvider, clock.New())
 	ctx.providers.SessionProvider = session.NewProvider(ctx.config.Session, ctx.trusted)
 	ctx.providers.TOTP = totp.NewTimeBasedProvider(ctx.config.TOTP)
-	logrus.Info("passed session provider parts")
 	var err error
 
 	switch {
