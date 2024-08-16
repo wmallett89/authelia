@@ -18,7 +18,6 @@ type Provider struct {
 // NewProvider instantiate a session provider given a configuration.
 func NewProvider(config schema.Session, certPool *x509.CertPool) *Provider {
 	log := logging.Logger()
-	log.Info("stepping into session provider")
 	name, p, s, err := NewSessionProvider(config, certPool)
 	if err != nil {
 		log.Fatal(err)
@@ -33,7 +32,6 @@ func NewProvider(config schema.Session, certPool *x509.CertPool) *Provider {
 	)
 
 	for _, dconfig := range config.Cookies {
-		log.Info("stepping into provider config and session")
 		if _, holder, err = NewProviderConfigAndSession(dconfig, name, s, p); err != nil {
 			log.Fatal(err)
 		}
