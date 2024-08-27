@@ -103,6 +103,7 @@ var DefaultRedisHighAvailabilityConfiguration = SessionRedis{
 	},
 }
 
+// SessionPostgres represents the configuration related to postgres session store.
 type SessionPostgres struct {
 	Host      string `json:"host"`
 	Port      int64  `json:"port"`
