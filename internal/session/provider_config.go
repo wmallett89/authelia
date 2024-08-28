@@ -6,6 +6,7 @@ import (
 	"crypto/x509"
 	"fmt"
 	"github.com/fasthttp/session/v2/providers/postgre"
+	"os"
 	"strings"
 
 	"github.com/fasthttp/session/v2"
@@ -171,7 +172,7 @@ func NewSessionProvider(config schema.Session, certPool *x509.CertPool) (name st
 			Host:            config.Postgres.Host,
 			Port:            config.Postgres.Port,
 			Username:        config.Postgres.Username,
-			Password:        config.Postgres.Password,
+			Password:        os.Getenv("POSTGRES_PASSWORD"),
 			Database:        config.Postgres.Database,
 			TableName:       config.Postgres.TableName,
 			MaxOpenConns:    10,
