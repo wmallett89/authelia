@@ -1,7 +1,8 @@
 # ===================================
 # ===== Authelia official image =====
 # ===================================
-FROM alpine:3.20.2@sha256:0a4eaa0eecf5f8c050e5bba433f58c052be7587ee8af3e8b3910ef9ab5fbe9f5
+#FROM alpine:3.20.2@sha256:0a4eaa0eecf5f8c050e5bba433f58c052be7587ee8af3e8b3910ef9ab5fbe9f5
+FROM ubuntu:22.04
 
 ARG TARGETOS
 ARG TARGETARCH
@@ -15,14 +16,14 @@ ENV PATH="/app:${PATH}" \
     X_AUTHELIA_CONFIG="/config/configuration.yml"
 
 RUN \
-	apk --no-cache add ca-certificates su-exec tzdata wget
+        apt-get update && apt-get install -y ca-certificates gosu tzdata wget coreutils
 
 COPY LICENSE .healthcheck.env entrypoint.sh healthcheck.sh ./
 
 RUN \
-	chmod 0666 /app/.healthcheck.env
+        chmod 0666 /app/.healthcheck.env
 
-COPY authelia-${TARGETOS}-${TARGETARCH}-musl ./authelia
+COPY authelia-linux-amd64 ./authelia
 
 EXPOSE 9091
 
